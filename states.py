@@ -1,0 +1,22 @@
+"""
+对话状态常量：用于 ConversationHandler 的状态机定义。
+"""
+
+# 记录收入流程
+INCOME_AMOUNT = 1
+INCOME_CATEGORY = 2
+INCOME_NOTE = 3
+
+# 记录支出流程
+EXPENSE_AMOUNT = 4
+EXPENSE_CATEGORY = 5
+EXPENSE_NOTE = 6
+
+# 预算管理流程
+BUDGET_SET = 7
+
+# 分类管理流程
+CATEGORY_TYPE = 8
+CATEGORY_ACTION = 9
+CATEGORY_ADD_NAME = 10
+CATEGORY_DELETE_SELECT = 11

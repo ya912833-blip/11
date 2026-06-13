@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  finance-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: telegram-finance-bot
+    restart: unless-stopped
+
+    # 从 .env 文件加载环境变量
+    env_file:
+      - .env
+
+    # 额外环境变量
+    environment:
+      - DB_PATH=/app/data/finance.db
+
+    # 数据库持久化：将容器内 /app/data 映射到宿主机 ./data
+    volumes:
+      - ./data:/app/data
+
+    # 资源限制
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+          cpus: "0.5"
+
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "python.*main.py"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
